@@ -5,7 +5,8 @@ public class AluguelDeBicicletasCompartilhadasApp {
 
 	public static void main(String[] args) {
 		Usuario usuario = new Usuario();
-		Cartao cartao = new Cartao();
+		Cartao cartao = new Cartao(usuario, "123456789", "123456789", 0, "123456789");
+		System.out.println(cartao.numeroCartao());
 		Scanner ler = new Scanner(System.in);
 		ArrayList <String> cpf = new ArrayList <String>();
 		ArrayList <String> nome = new ArrayList <String>();
