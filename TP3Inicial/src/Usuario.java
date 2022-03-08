@@ -3,147 +3,207 @@ import java.util.Scanner;
 
 public class Usuario {
 
-    //❖ Atributos: número de CPF, nome, data de nascimento, endereço, telefone.
-    //❖ Métodos: cadastrar, editar, deletar, visualizar*/
+    // ❖ Atributos: número de CPF, nome, data de nascimento, endereço, telefone.
+    // ❖ Métodos: cadastrar, editar, deletar, visualizar*/
     private String cpf; // > 11
     private String nome; // > 2 caracteres
     private String dataNascimento; // dd/mm/aaaa
     private String endereco; // >0
     private String telefone; // >8
+    private ArrayList<Cartao> cartoes = new ArrayList<>();
+
     Scanner ler = new Scanner(System.in);
 
-
-    public String addCpf(){
+    public void addCpf() {
         String cpf;
         Scanner ler = new Scanner(System.in);
 
         System.out.println("Digite seu CPF: ");
         cpf = ler.nextLine();
-        while(cpf.length() < 11 || cpf.length() > 11){
+        while (cpf.length() < 11 || cpf.length() > 11) {
             System.out.println("CPF invalido, digite novamente: ");
             cpf = ler.nextLine();
         }
-        return cpf;
-        
+        this.cpf = cpf;
+
     }
 
-    public String addNome(){
+    public void addNome() {
         String nome;
         Scanner ler = new Scanner(System.in);
 
         System.out.println("Digite seu nome: ");
         nome = ler.nextLine();
-        while(nome.length() < 2){
+        while (nome.length() < 2) {
             System.out.println("Nome invalido, digite novamente: ");
             nome = ler.nextLine();
         }
-        return nome;
+        this.nome = nome;
     }
 
-    public String addDataNascimento(){
+    public void addDataNascimento() {
         String dataNascimento;
         Scanner ler = new Scanner(System.in);
-        
+
         System.out.println("Digite sua data de nascimento: ");
         dataNascimento = ler.nextLine();
-        return dataNascimento;
+        this.dataNascimento = dataNascimento;
     }
 
-    public String addEndereco(){
+    public void addEndereco() {
         String endereco;
         Scanner ler = new Scanner(System.in);
 
         System.out.println("Digite seu endereco: ");
         endereco = ler.nextLine();
-        while(endereco.length() == 0){
+        while (endereco.length() == 0) {
             System.out.println("Endereco invalido, digite novamente: ");
             endereco = ler.nextLine();
         }
-        return endereco;
+        this.endereco = endereco;
     }
 
-    public String addTelefone(){
+    public void addTelefone() {
         String telefone;
         Scanner ler = new Scanner(System.in);
 
         System.out.println("Dgite seu telefone: ");
         telefone = ler.nextLine();
 
-        while(telefone.length() < 8){
+        while (telefone.length() < 8) {
             System.out.println("Telefone invalido, digite novamente: ");
             telefone = ler.nextLine();
         }
-        return telefone;
+        this.telefone = telefone;
     }
 
-    public String getCpf(){
+    public static void imprimeCadastro(ArrayList<Usuario> usuarios, String busca) {
+        if (usuarios.size() == 0) {
+            System.out.println("Não há usuarios cadastrados");
+        } else {
+            for (Usuario usr : usuarios) {
+                if (usr.nome.contains(busca))
+                    System.out.println(usr.toString() + "\n");
+            }
+        }
+    }
+
+    public static void excluiUsuario(ArrayList<Usuario> usuarios, String busca) {
+        int cont = 0;
+        for (Usuario usr : usuarios) {
+            if (usr.nome.equalsIgnoreCase(busca)) {
+                usuarios.remove(usr);
+                System.out.printf("Usuário %s excluído com sucesso.", usr.nome);
+                cont++;
+                break;
+            }
+        }
+
+        if (cont == 0) {
+            System.out.println("Nenhum usuário encontrado com esse nome");
+        }
+
+    }
+
+    public static void editarUsuario(ArrayList<Usuario> usuarios, String busca) {
+        int cont = 0;
+        String editarUsuario;
+        Scanner ler = new Scanner(System.in);
+        for (Usuario usr : usuarios) {
+            if (usr.nome.equalsIgnoreCase(busca)) {
+                System.out.println("Digite seu CPF: ");
+                editarUsuario = ler.nextLine();
+                usr.setCpf(editarUsuario);
+
+                System.out.println("Digite seu nome: ");
+                editarUsuario = ler.nextLine();
+                usr.setNome(editarUsuario);
+
+                System.out.println("Digite seu endereco: ");
+                editarUsuario = ler.nextLine();
+                usr.setEndereco(editarUsuario);
+
+                System.out.println("Digite sua data de nascimento: ");
+                editarUsuario = ler.nextLine();
+                usr.setDataNascimento(editarUsuario);
+
+                System.out.println("Digite seu telefone: ");
+                editarUsuario = ler.nextLine();
+                usr.setTelefone(editarUsuario);
+            }
+            cont++;
+            break;
+        }
+
+        if (cont == 0) {
+            System.out.println("Nenhum usuário encontrado com esse nome");
+        }
+    }
+
+    public void addCartao(ArrayList<Usuario> usuarios, String busca) {
+        int cont = 0;
+        for (Usuario usr : usuarios) {
+            if (usr.nome.equalsIgnoreCase(busca)) {
+                usuarios.remove(usr);
+                System.out.printf("Usuário %s excluído com sucesso.", usr.nome);
+                cont++;
+                break;
+            }
+        }
+
+        if (cont == 0) {
+            System.out.println("Nenhum usuário encontrado com esse nome");
+        }
+
+    }
+
+    public String getCpf() {
         return this.cpf;
     }
 
-    public String getNome(ArrayList <String> nome, int qntd){
-        return nome.get(qntd);
+    public String getNome() {
+        return this.nome;
     }
 
-    public String getDataNascimento(){
+    public String getDataNascimento() {
         return this.dataNascimento;
     }
 
-    public String getEndereco(){
+    public String getEndereco() {
         return this.endereco;
     }
 
-    public String getTelefone(){
+    public String getTelefone() {
         return this.telefone;
     }
 
-    public void imprimeCadastro(ArrayList <String> cpf, ArrayList <String> nome, ArrayList <String> endereco, ArrayList <String> dataNascimento, ArrayList <String> telefone, int qntd){
-        if(qntd == -1){
-            System.out.println("Não há usuario cadastrado");
-        }
-        for(int i = 0; i <= qntd; i++){
-            System.out.println("\nNome: " + nome.get(i) + "\nCPF: " + cpf.get(i) + "\nEndereco: " + endereco.get(i) + "\nData de nascimento: " + dataNascimento.get(i) + "\n\nTelefone: " + telefone.get(i));
-        }
+    public ArrayList<Cartao> getCartoes() {
+        return cartoes;
     }
 
-    public void excluiUsuario(ArrayList <String> cpf, ArrayList <String> nome, ArrayList <String> endereco, ArrayList <String> dataNascimento, ArrayList <String> telefone, int qntd){
-        String apagarUsuario;
-        System.out.println("Digite o seu nome para confirmar a exclusao: ");
-        apagarUsuario = ler.nextLine();
-
-        if(nome.get(qntd).equalsIgnoreCase(apagarUsuario)){
-            nome.remove(qntd);
-            cpf.remove(qntd);
-            endereco.remove(qntd);
-            dataNascimento.remove(qntd);
-            telefone.remove(qntd);
-        }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public void editarUsuario(ArrayList <String> cpf, ArrayList <String> nome, ArrayList <String> endereco, ArrayList <String> dataNascimento, ArrayList <String> telefone, int qntd){
-        String editarUsuario;
-        System.out.println("Digite o seu nome para confirmar a edicao de dados: ");
-        editarUsuario = ler.nextLine();
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-        if(nome.get(qntd).equalsIgnoreCase(editarUsuario)){
-            System.out.println("Digite seu CPF: ");
-            editarUsuario = ler.nextLine();
-            cpf.set(qntd, editarUsuario);
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
-            System.out.println("Digite seu nome: ");
-            editarUsuario = ler.nextLine();
-            nome.set(qntd, editarUsuario);
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
-            System.out.println("Digite seu endereco: ");
-            editarUsuario = ler.nextLine();
-            endereco.set(qntd, editarUsuario);
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-            System.out.println("Digite sua data de nascimento: ");
-            editarUsuario = ler.nextLine();
-            dataNascimento.set(qntd, editarUsuario);
-
-            System.out.println("Digite seu telefone: ");
-            editarUsuario = ler.nextLine();
-            telefone.set(qntd, editarUsuario);
-        }
+    @Override
+    public String toString() {
+        return ("Nome: " + this.getNome() + "\nCPF: " + this.getCpf() + "\nEndereco: " + this.getEndereco()
+                + "\nData de nascimento: " + this.getDataNascimento() + "\nTelefone: " + this.getTelefone());
     }
 }

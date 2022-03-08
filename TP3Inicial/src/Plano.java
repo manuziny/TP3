@@ -1,14 +1,5 @@
-public abstract class Plano extends Cartao {
+public abstract class Plano{
 	private String local, dadosCartao, perfil, tipoPlano;
-
-	public Plano(Usuario usuario, String numeroCartao, String nomeTitular, int codVerificacao, String cpfTitular,
-			String local, String dadosCartao, String perfil, String tipoPlano) {
-		super(usuario, numeroCartao, nomeTitular, codVerificacao, cpfTitular);
-		this.local = local;
-		this.dadosCartao = dadosCartao;
-		this.perfil = perfil;
-		this.tipoPlano = tipoPlano;
-	}
 
 	public String getLocal() {
 		return local;
