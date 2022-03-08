@@ -7,11 +7,13 @@ public class AluguelDeBicicletasCompartilhadasApp {
 
 		Scanner ler = new Scanner(System.in);
 		String busca;
+		int ID;
 		Boolean match;
 
 		ArrayList<Usuario> usuarios = new ArrayList<>();
+		ArrayList<Bicicleta> bicicletas = new ArrayList<>();
 
-		// declaracao de variaveis:/* */
+		// declaracao de variaveis:
 		int opcoes = 0;
 		int qntd = -1;
 		int qntdCartao = 0;
@@ -29,6 +31,7 @@ public class AluguelDeBicicletasCompartilhadasApp {
 				usuario.addDataNascimento();
 				usuario.addTelefone();
 				usuarios.add(usuario);
+				System.out.println(usuarios.toString());
 				qntd++;
 				break;
 
@@ -83,11 +86,9 @@ public class AluguelDeBicicletasCompartilhadasApp {
 						for (int i = 0; i < usr.getCartoes().size(); i++) {
 							System.out.printf("%d - %s\n", i, usr.getCartoes().get(i).toString());
 						}
-
 						match = true;
 					}
 				}
-
 				if (!match) {
 					System.out.println("Nenhum usuário com esse nome encontrado.");
 				}
@@ -99,6 +100,19 @@ public class AluguelDeBicicletasCompartilhadasApp {
 				busca = ler.nextLine();
 
 				Cartao.excluiCartao(usuarios, busca);
+				break;
+			case 8:
+				Bicicleta bici = new Bicicleta();
+				bici.addId();
+				bici.addCategoria();
+				bici.addMarca();
+				bicicletas.add(bici);
+				System.out.println(bicicletas.toString());
+				break;
+			case 9:
+				System.out.println("Digite o ID da bicicleta que deseja editar:");
+				ID = ler.nextInt();
+				Bicicleta.editarBicicleta(bicicletas, ID);
 				break;
 			case 0:
 				// encerrar
