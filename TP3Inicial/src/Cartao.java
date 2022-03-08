@@ -3,134 +3,125 @@ import java.util.Scanner;
 
 public class Cartao {
 
-    //❖ Atributos: usuário, cartão (cadastro padrão) número, nome, código de verificação e CPF
-    //❖ Métodos: cadastrar, editar, deletar, visualizar
-    Usuario usuario = new Usuario();
-    private String numeroCartao; // entre 13 e 16
-    private String nomeTitular; // > 0
-    private int codVerificacao; // == 3
-    private String cpfTitular; // == 11
-    Scanner ler = new Scanner(System.in);
-    
-    public String addNumeroCartao(){
-        String numeroCartao;
-        Scanner ler = new Scanner(System.in);
+	// â�– Atributos: usuÃ¡rio, cartÃ£o (cadastro padrÃ£o) nÃºmero, nome, cÃ³digo de
+	// verificaÃ§Ã£o e CPF
+	// â�– MÃ©todos: cadastrar, editar, deletar, visualizar
+	Usuario usuario = new Usuario();
+	private String numeroCartao; // entre 13 e 16
+	private String nomeTitular; // > 0
+	private String codVerificacao; // == 3
+	private String cpfTitular; // == 11
+	Scanner ler = new Scanner(System.in);
 
-        System.out.println("Digite o numero de seu cartao: ");
-        numeroCartao = ler.nextLine();
-        while(numeroCartao.length() < 11 || numeroCartao.length() > 11){
-            System.out.println("CPF invalido, digite novamente: ");
-            numeroCartao = ler.nextLine();
-        }
-        return numeroCartao;
-    }
+	public Cartao(Usuario usuario, String numeroCartao, String codVerificacao, String cpfTitular) {
+		this.usuario = usuario;
+		this.numeroCartao = numeroCartao;
+		this.nomeTitular = usuario.getNome();
+		this.codVerificacao = codVerificacao;
+		this.cpfTitular = usuario.getCpf();
+	}
 
-    public String addNomeTitular(){
-        String nomeTitular;
-        Scanner ler = new Scanner(System.in);
+	public Cartao() {
+	}
 
-        System.out.println("Digite o nome do titular: ");
-        nomeTitular = ler.nextLine();
-        while(nomeTitular.length() < 2){
-            System.out.println("Nome invalido, digite novamente: ");
-            nomeTitular = ler.nextLine();
-        }
-        return nomeTitular;
-    }
+	public void addNumeroCartao() {
+		String numeroCartao;
+		Scanner ler = new Scanner(System.in);
 
-    public String addCodVerificacao(){
-        String codVerificacao;
-        Scanner ler = new Scanner(System.in);
+		System.out.println("Digite o numero de seu cartao: ");
+		numeroCartao = ler.nextLine();
+		while (numeroCartao.length() < 11 || numeroCartao.length() > 11) {
+			System.out.println("CPF invalido, digite novamente: ");
+			numeroCartao = ler.nextLine();
+		}
+		this.numeroCartao = numeroCartao;
+	}
 
-        System.out.println("Digite o CVC: ");
-        codVerificacao = ler.nextLine();
-        while(codVerificacao.length() < 3 || codVerificacao.length() > 3){
-            System.out.println("CVC invalido, digite novamente: ");
-            codVerificacao = ler.nextLine();
-        }
-        return codVerificacao;
-        
-    }
+	public void addNomeTitular() {
+		String nomeTitular;
+		Scanner ler = new Scanner(System.in);
 
-    public String addCpfTitular(){
-        String cpfTitular;
-        Scanner ler = new Scanner(System.in);
+		System.out.println("Digite o nome do titular: ");
+		nomeTitular = ler.nextLine();
+		while (nomeTitular.length() < 2) {
+			System.out.println("Nome invalido, digite novamente: ");
+			nomeTitular = ler.nextLine();
+		}
+		this.nomeTitular = nomeTitular;
+	}
 
-        System.out.println("Digite o CPF do titular: ");
-        cpfTitular = ler.nextLine();
-        while(cpfTitular.length() < 11 || cpfTitular.length() > 11){
-            System.out.println("CPF invalido, digite novamente: ");
-            cpfTitular = ler.nextLine();
-        }
-        return cpfTitular;
-    }
+	public void addCodVerificacao() {
+		String codVerificacao;
+		Scanner ler = new Scanner(System.in);
 
-    public String numeroCartao(){
-        return this.numeroCartao;
-    }
+		System.out.println("Digite o CVC: ");
+		codVerificacao = ler.nextLine();
+		while (codVerificacao.length() < 3 || codVerificacao.length() > 3) {
+			System.out.println("CVC invalido, digite novamente: ");
+			codVerificacao = ler.nextLine();
+		}
+		this.codVerificacao = codVerificacao;
 
-    public String nomeTitular(){
-        return this.nomeTitular;
-    }
+	}
 
-    public int codVerificacao(){
-        return this.codVerificacao;
-    }
+	public void addCpfTitular() {
+		String cpfTitular;
+		Scanner ler = new Scanner(System.in);
 
-    public String getCpf(){
-        return this.cpfTitular;
-    }
+		System.out.println("Digite o CPF do titular: ");
+		cpfTitular = ler.nextLine();
+		while (cpfTitular.length() < 11 || cpfTitular.length() > 11) {
+			System.out.println("CPF invalido, digite novamente: ");
+			cpfTitular = ler.nextLine();
+		}
+		this.cpfTitular = cpfTitular;
+	}
 
-    public void imprimeDadosCartao(ArrayList <String> nome, ArrayList <String> numeroCartao, ArrayList <String> nomeTitular, ArrayList <String> codVerificacao, ArrayList <String> cpfTitular, int qntd){
-        if(qntd == -1){
-            System.out.println("Nao ha cartao(oes) cadastrado(s)");
-        }
-        else{
-            for(int i = 0; i <= qntd; i++){
-            System.out.println("\nNome do usuario: " + usuario.getNome(nome, qntd) + "\nNumero do cartao: " + numeroCartao.get(i) + "\nNome titular: " + nomeTitular.get(i) + "\nCVC: " + codVerificacao.get(i) + "\nCPF titular: " + cpfTitular.get(i));
-            }
-        }
-    }
+	public String numeroCartao() {
+		return this.numeroCartao;
+	}
 
-    public void excluiCartao(ArrayList <String> numeroCartao, ArrayList <String> nomeTitular, ArrayList <String> codVerificacao, ArrayList <String> cpfTitular, int qntd){
-        String apagarCartao;
-        System.out.println("Digite o numero do cartao que deseja apagar: ");
-        apagarCartao = ler.nextLine();
+	public String nomeTitular() {
+		return this.nomeTitular;
+	}
 
-        if(numeroCartao.get(qntd).equalsIgnoreCase(apagarCartao)){
-            numeroCartao.remove(qntd);
-            nomeTitular.remove(qntd);
-            codVerificacao.remove(qntd);
-            cpfTitular.remove(qntd);
-        }
-    }
+	public String codVerificacao() {
+		return this.codVerificacao;
+	}
 
-    public void editarUsuario(ArrayList <String> numeroCartao, ArrayList <String> nomeTitular, ArrayList <String> codVerificacao, ArrayList <String> cpfTitular, int qntd){
-        String editarCartao;
-        Scanner ler = new Scanner(System.in);
-        System.out.println("Digite o numero do cartao que deseja apagar: ");
+	public String getCpf() {
+		return this.cpfTitular;
+	}
 
-        editarCartao = ler.nextLine();
+	public static void excluiCartao(ArrayList<Usuario> usuarios, String busca) {
+		Boolean match = false;
+		int escolha;
+		Scanner ler = new Scanner(System.in);
+		for (Usuario usr : usuarios) {
+			if (usr.getNome().equalsIgnoreCase(busca)) {
 
-        if(numeroCartao.get(qntd).equalsIgnoreCase(editarCartao)){
-            System.out.println("Digite o numero do cartao: ");
-            editarCartao = ler.nextLine();
-            numeroCartao.set(qntd, editarCartao);
+				for (int i = 0; i < usr.getCartoes().size(); i++) {
+					System.out.printf("%d - %s\n", i, usr.getCartoes().get(i).toString());
+				}
+				System.out.println("Escolha um cartao pelo número da lista: ");
+				escolha = ler.nextInt();
+				while (escolha <= 0 || escolha > usr.getCartoes().size()) {
+					System.out.println("Escolha um número válido: ");
+					escolha = ler.nextInt();
+				}
+				usr.getCartoes().remove(escolha);
 
-            System.out.println("Digite o nome do titular: ");
-            editarCartao = ler.nextLine();
-            nomeTitular.set(qntd, editarCartao);
+				match = true;
+			}
+		}
+		if (!match) {
+			System.out.println("Nenhum usuário com esse nome encontrado.");
+		}
+	}
 
-            System.out.println("Digite o CVC: ");
-            editarCartao = ler.nextLine();
-            codVerificacao.set(qntd, editarCartao);
-
-            System.out.println("Digite o CPF do titular: ");
-            editarCartao = ler.nextLine();
-            cpfTitular.set(qntd, editarCartao);
-
-        }
-    }
-   
+	@Override
+	public String toString() {
+		return "Titular: " + this.nomeTitular + "Final: " + this.numeroCartao.substring(this.numeroCartao.length() - 5)
+				+ "\n";
+	}
 }
-
